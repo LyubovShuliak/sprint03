@@ -1,59 +1,35 @@
-// function makeCounter() {
-//   let count = 0
-//   return function () {
-//     return count++
-//   }
-// }
-
-// let counter = makeCounter()
-// function doSave() {
-//   makeCounter()
-//   //Set the item in doSave()
-//   localStorage.setItem(counter(), text.value)
-//   let outtext = Object.values({ ...localStorage })
-//   console.log(outtext);
-//   let output = document.getElementById("cookies")
-//   output.textContent += localStorage.getItem(`${counter()}`)
-// }
-
-// //When the window loads...
-// window.onload = function () {
-//   saveButton = document.querySelector(".Show")
-//   saveButton.onclick = doSave
-
-//   textarea = document.getElementById("text")
-// }
-
-const elementBtn = document.querySelector('.Show');
-const elementUl = document.querySelector('ul');
-
-function updateStorage() {
-  const data = [];
-  for (let element of elementUl.querySelectorAll('li')) {
-    data.push(element.textContent);
+function WriteCookie() {
+  if (document.myform.customer.value == "") {
+    alert("Enter some value!")
+    return
   }
-  localStorage['items'] = JSON.stringify(data);
+  cname = escape(document.myform.customer.value) + ";"
+  document.cookie = "name=" + cname
+  let archive = document.getElementById("archive")
+  let cookiesd = []
+  console.log(cookiesd)
+  let l = cname
+
+  cookiesd.push(l)
+}
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  let expires = "expires=" + d.toUTCString()
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
 }
 
-function updateUl(items) {
-  const html = [];
-  for (let item of items) {
-    html.push(`<li>-->${localStorage.getItem(item)}</li>`);
+function getCookie(cname) {
+  let name = cname + "="
+  let ca = document.cookie.split(";")
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i]
+    while (c.charAt(0) == " ") {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length)
+    }
   }
-  elementUl.innerHTML = html.join('');
-}
-
-elementBtn.onclick = () => {
-  const elementsLi = elementUl.querySelectorAll('li');
-  const newLi = document.createElement('li');
-  newLi.textContent = localStorage.getItem(item);
-  elementUl.append(newLi);
-  updateStorage();
-}
-
-window.onstorage = event => {
-    saveButton = document.querySelector(".Show")
-      saveButton.onclick = doSave
-    
-      textarea = document.getElementById("text")
+  return ""
 }

@@ -7,21 +7,11 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="cookie-holder">
-      <button class="Show" >Show cookies</button>
-
-      <button class="Clear" >Clear</button>
-      <div class="text">
-      <p>Text input:</p>
-      <textarea name="text" id="text" cols="30" rows="10"></textarea>
-    </div>
-      <div class="archive">
-        <p>Notes archive:</p>
-        <p>
-       <ul></ul>
-    </p>
-      </div>
-    </div>
+    <form name = "myform" action = "">
+      Enter name: <input type = "text" name = "customer"/>
+      <input type = "button" value = "Set Cookie" onclick = "WriteCookie();"/>
+      <p id= "archive"></p>
+   </form>  
     <script src="./js/script.js"></script>
   </body>
 </html>
