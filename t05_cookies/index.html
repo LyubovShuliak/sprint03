@@ -3,15 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <form name = "myform" action = "">
-      Enter name: <input type = "text" name = "customer"/>
-      <input type = "button" value = "Set Cookie" onclick = "WriteCookie();"/>
-      <p id= "archive"></p>
-   </form>  
-    <script src="./js/script.js"></script>
+    <h1>Cookie</h1>
+
+    <div class="container">
+      <div class="button-handler">
+        <div class="btn add-btn">Add to cookies</div>
+        <div class="btn clear-btn">Clear cookies</div>
+      </div>
+      
+      <div class="wrapper">
+        <div class="input-wrapper">
+          <p class="description">Text inputs</p>
+          <textarea class="text-input-filed" name="" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <p class="description">Note archives</p>
+        <div class="output-list">
+        </div>
+      </div>
+    </div>
   </body>
+
+  <script src="./js/script.js"></script>
 </html>

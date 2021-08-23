@@ -1,35 +1,65 @@
-function WriteCookie() {
-  if (document.myform.customer.value == "") {
-    alert("Enter some value!")
-    return
-  }
-  cname = escape(document.myform.customer.value) + ";"
-  document.cookie = "name=" + cname
-  let archive = document.getElementById("archive")
-  let cookiesd = []
-  console.log(cookiesd)
-  let l = cname
+const inputFiled = document.querySelector('.text-input-filed')
+const outputList = document.querySelector('.output-list')
+const addCookieBtn = document.querySelector('.add-btn')
+const clearCookieBtn = document.querySelector('.clear-btn')
+const expireDays = 30 * 24 * 60 * 60
 
-  cookiesd.push(l)
+addCookieBtn.addEventListener('click', addCookie)
+clearCookieBtn.addEventListener('click', clearCookie)
+
+function addCookie() {
+  const oldCookies = getCookie('note_archive')
+  console.log(outputList)
+  if (outputList.children[0].innerHTML === '[Empty]') {
+    outputList.removeChild(outputList.children[0])
+  }
+
+  createOutputItem(inputFiled.value)
+  if (oldCookies) {
+    document.cookie = `note_archive=${oldCookies} ${inputFiled.value}; max-age=${expireDays}`
+  } else {
+    document.cookie = `note_archive=${inputFiled.value}; max-age=${expireDays}`
+  }
+  inputFiled.value = ''
 }
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date()
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
-  let expires = "expires=" + d.toUTCString()
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
+function clearCookie() {
+  const shouldDelete = confirm('Are you sure?')
+  if (shouldDelete) {
+    outputList.innerHTML = null
+    document.cookie = 'note_archive=; max-age=-1'
+    createEmptyMessage()
+  }
 }
 
-function getCookie(cname) {
-  let name = cname + "="
-  let ca = document.cookie.split(";")
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) == " ") {
-      c = c.substring(1)
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+  )
+  return matches ? decodeURIComponent(matches[1]) : undefined
+}
+
+function createOutputItem(value) {
+  const outputItem = document.createElement('p')
+  outputItem.classList.add('output-item')
+  outputItem.innerHTML = '-->' + value
+  outputList.appendChild(outputItem)
+}
+
+window.onload = () => {
+  const currentCookie = getCookie('note_archive')
+  if (currentCookie) {
+    const outputArray = currentCookie.split(' ')
+
+    for (let i = 0; i < outputArray.length; i++) {
+      createOutputItem(outputArray[i])
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length)
-    }
+  } else {
+    createEmptyMessage()
   }
-  return ""
+}
+
+function createEmptyMessage() {
+  const noCookies = document.createElement('p')
+  noCookies.innerHTML = '[Empty]'
+  outputList.appendChild(noCookies)
 }

@@ -40,10 +40,5 @@ function changeWords(obj, oldWrds, newWrds) {
   return obj
 }
 
-const obj = { words: "newspapers newspapers  books magazines" }
-console.log(obj)
-addWords(obj, "radio newspapers   ")
-removeWords(obj, "newspapers   radio")
-console.log(obj)
-changeWords(obj, "books radio  magazines", "tv internet")
+const obj = { words: "newspapers newspapers books magazines" }
 console.log(obj)
