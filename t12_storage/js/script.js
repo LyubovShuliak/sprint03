@@ -1,56 +1,84 @@
-// function makeCounter() {
-//   let count = 0
-//   return function () {
-//     return count++
-//   }
-// }
+const inputFiled = document.querySelector(".text-input-filed")
+const outputList = document.querySelector(".output-list")
+const addStorageBtn = document.querySelector(".add-btn")
+const clearStorageBtn = document.querySelector(".clear-btn")
 
-// let counter = makeCounter()
-// function doSave() {
-//   makeCounter()
-//   //Set the item in doSave()
-//   localStorage.setItem(counter(), text.value)
-//   let outtext = Object.values({ ...localStorage })
-//   console.log(outtext);
-//   let output = document.getElementById("cookies")
-//   output.textContent += localStorage.getItem(`${counter()}`)
-// }
+addStorageBtn.addEventListener("click", addLocalItem)
+clearStorageBtn.addEventListener("click", clearStorage)
 
-// //When the window loads...
-// window.onload = function () {
-//   saveButton = document.querySelector(".Show")
-//   saveButton.onclick = doSave
-
-//   textarea = document.getElementById("text")
-// }
-
-const elementBtn = document.querySelector('.Show');
-const elementUl = document.querySelector('ul');
-
-function updateStorage() {
-  const data = [];
-  for (let element of elementUl.querySelectorAll('li')) {
-    data.push(element.textContent);
+function addLocalItem() {
+  if (outputList.children[0].innerHTML === "[Empty]") {
+    outputList.removeChild(outputList.children[0])
   }
-  localStorage['items'] = JSON.stringify(data);
-}
 
-function updateUl(items) {
-  const html = [];
-  for (let item of items) {
-    html.push(`<li>${item}</li>`);
+  createOutputItem(inputFiled.value, Date.now() )
+  const currentLocalStorage = localStorage.getItem("note_archive")
+  const storageItem = {
+    message: inputFiled.value,
+    date: Date.now(),
   }
-  elementUl.innerHTML = html.join('');
+
+  if (currentLocalStorage) {
+    console.log(JSON.parse(currentLocalStorage))
+    localStorage.setItem(
+      "note_archive",
+      JSON.stringify([...JSON.parse(currentLocalStorage), storageItem])
+    )
+  } else {
+    localStorage.setItem("note_archive", JSON.stringify([storageItem]))
+  }
+  inputFiled.value = ""
 }
 
-elementBtn.onclick = () => {
-  const elementsLi = elementUl.querySelectorAll('li');
-  const newLi = document.createElement('li');
-  newLi.textContent = elementsLi.length + 1;
-  elementUl.append(newLi);
-  updateStorage();
+function clearStorage() {
+  const shouldDelete = confirm("Are you sure?")
+  if (shouldDelete) {
+    outputList.innerHTML = null
+    localStorage.removeItem("note_archive")
+
+    createEmptyMessage()
+  }
 }
 
-window.onstorage = event => {
-  updateUl(JSON.parse(event.newValue));
+function createOutputItem(value, date) {
+  const outputItem = document.createElement("p")
+  outputItem.classList.add("output-item")
+  outputItem.innerHTML = "-->" + value + getFormattedDate(date)
+  outputList.appendChild(outputItem)
 }
+
+window.onload = () => {
+  const curentStorage = localStorage.getItem("note_archive")
+  const curent = JSON.parse(curentStorage)
+  console.log(curent);
+
+  if (curent) {
+    for (let i = 0; i < curent.length; i++) {
+      createOutputItem(curent[i].message,curent[i].date)
+    }
+  } else {
+    createEmptyMessage()
+  }
+}
+
+function createEmptyMessage() {
+  const noLocalItem = document.createElement("p")
+  noLocalItem.innerHTML = "[Empty]"
+  outputList.appendChild(noLocalItem)
+}
+function getFormattedDate(date) {
+  const options1 = {
+    year: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    month: "numeric",
+  }
+
+  const dateTimeFormat = new Intl.DateTimeFormat("en-GB", options1)
+  let date1 = dateTimeFormat.format(date).toString()
+
+  return "[" + date1.replace(/[/]/g, ".") + "]"
+}
+

@@ -4,6 +4,7 @@ function getFormattedDate(date) {
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
+    second:'numeric',
     month: 'numeric'
   };
   const options2 = {

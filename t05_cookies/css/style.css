@@ -1,41 +1,35 @@
-.cookie-holder {
-    width: 800px;
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: 1fr 1fr;
-}
-
-.Show, .Clear{
-    width: 100px;
-}
-.Clear{
-    justify-self: end;
-}
-.text{
+.container {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .wrapper {
+    margin: 20px 0;
+    background-color: lightgray;
+    padding: 20px;
+  }
+  
+  .button-handler {
     display: flex;
-    flex-direction: column;
-    grid-column:span 2;
-    width: 800px;
-    height: 250px;
-    background-color: rgb(228, 226, 226);
-}
-#text{
-    width: calc(100% - 50px);
-    align-self: center;
-    border: 3px solid blue;
-    
-}
-.archive{
-    background-color: rgb(228, 226, 226);
-    grid-column:span 2;
-}
-p{
+    justify-content: space-between;
+  }
+  
+  .btn {
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 4px;
+  }
+  
+  .add-btn {
+    background-color: aqua;
+  }
+  
+  .text-input-filed {
     width: 100%;
-    background-color: white;
-}
-.cookies{
-    height: fit-content;
-}
-ul{
-    list-style-type: none;
-}
+    max-width: 100%;
+  }
+  
+  .output-list {
+    background-color: #fff;
+  }
+  
