@@ -8,19 +8,21 @@
     <title>Document</title>
   </head>
   <body>
-      <div class="slide">
-       <a class="prev" onclick="plusSlides(-1)"><div class="arrow left"> </div></a>
-      <div class="slide_holder">
-    <!-- <a class="prev" onclick="plusSlides(-1)"><div class="arrow left"> </div></a> -->
-    <div class="slider">
-      <img src="./assets/images/image1.jpg" alt="" srcset="" />
-      <img src="./assets/images/image2.jpg" alt="" srcset="" />
-      <img src="./assets/images/image3.jpg" alt="" srcset="" />
-    </div>
-    <!-- <a class="next" onclick="plusSlides(1)">  <div class="arrow  "></div></a> -->
-</div>
- <a class="prev" onclick="plusSlides(1)"><div class="arrow right"> </div></a>
-</div>
+    <section class="home">
+      <div class="prev"><div class="arrow left"></div></div>
+      <div class="slider">
+        <img src="assets/images/image1.jpg" alt="" srcset="" class="slide" />
+        <img src="assets/images/image2.jpg" alt="" srcset="" class="slide" />
+        <img
+          src="assets/images/image3.jpg"
+          alt=""
+          srcset=""
+          class="slide active"
+        />
+      </div>
+      <div class="next"><div class="arrow "></div></div>
+    </section>
+
     <script src="./js/script.js"></script>
   </body>
 </html>

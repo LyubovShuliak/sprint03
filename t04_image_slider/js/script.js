@@ -1,48 +1,54 @@
-var slideIndex = 1
+const slides = document.querySelector(".slider").children
+console.log(slides)
+const prev = document.querySelector(".prev")
+const next = document.querySelector(".next")
 
-var myTimer
+let index = 0
 
-var slideshowContainer
+prev.addEventListener("click", function () {
+  prevSlide()
 
-window.addEventListener("load", function () {
-  showSlides(slideIndex)
-  myTimer = setInterval(function () {
-    plusSlides(1)
-  }, 3000)
-
-  slideshowContainer = document.getElementsByClassName("slider")[0]
+  deleteTimer()
 })
 
-function plusSlides(n) {
-  clearInterval(myTimer)
-  if (n < 0) {
-    showSlides((slideIndex -= 1))
+next.addEventListener("click", function () {
+  nextSlide()
+
+  deleteTimer()
+})
+
+function prevSlide() {
+  if (index == 0) {
+    index = slides.length - 1
   } else {
-    showSlides((slideIndex += 1))
+    index--
   }
+  changeSlide()
 }
 
-function currentSlide(n) {
-  clearInterval(myTimer)
-  myTimer = setInterval(function () {
-    plusSlides(n + 1)
-  }, 4000)
-  showSlides((slideIndex = n))
+function nextSlide() {
+  if (index == slides.length - 1) {
+    index = 0
+  } else {
+    index++
+  }
+  changeSlide()
 }
 
-function showSlides(n) {
-  var i
-  var slides = document.querySelectorAll("img")
-
-  if (n > slides.length) {
-    slideIndex = 1
-  }
-  if (n < 1) {
-    slideIndex = slides.length
-  }
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none"
+function changeSlide() {
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].classList.remove("active")
   }
 
-  slides[slideIndex - 1].style.display = "block"
+  slides[index].classList.add("active")
 }
+
+function deleteTimer() {
+  clearInterval(timer)
+}
+
+function autoPlay() {
+  nextSlide()
+}
+
+let timer = setInterval(autoPlay, 3000)
