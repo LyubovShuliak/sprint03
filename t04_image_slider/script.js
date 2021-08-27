@@ -20,35 +20,8 @@
       
    })
 
-   // create circle indicators
-    function circleIndicator(){
-        for(let i=0; i< slides.length; i++){
-        	const div=document.createElement("div");
-        	      div.innerHTML=i+1;
-                div.setAttribute("onclick","indicateSlide(this)")
-                div.id=i;
-                if(i==0){
-                	div.className="active";
-                }
-               indicator.appendChild(div);
-        }
-    }
-    circleIndicator();
-
-    function indicateSlide(element){
-         index=element.id;
-         changeSlide();
-         updateCircleIndicator();
-         resetTimer();
-    }
      
-    function updateCircleIndicator(){
-    	for(let i=0; i<indicator.children.length; i++){
-    		indicator.children[i].classList.remove("active");
-    	}
-    	indicator.children[index].classList.add("active");
-    }
-
+   
    function prevSlide(){
    	 if(index==0){
    	 	index=slides.length-1;
@@ -88,7 +61,7 @@
   
   function autoPlay(){
       nextSlide();
-      updateCircleIndicator();
+  
   }
 
   let timer=setInterval(autoPlay,4000);
