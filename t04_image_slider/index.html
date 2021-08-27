@@ -1,26 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <title>Document</title>
-  </head>
-  <body>
-      <div class="slide">
-       <a class="prev" onclick="plusSlides(-1)"><div class="arrow left"> </div></a>
-      <div class="slide_holder">
-    <!-- <a class="prev" onclick="plusSlides(-1)"><div class="arrow left"> </div></a> -->
-    <div class="slider">
-      <img src="./assets/images/image1.jpg" alt="" srcset="" />
-      <img src="./assets/images/image2.jpg" alt="" srcset="" />
-      <img src="./assets/images/image3.jpg" alt="" srcset="" />
+<html>
+<head>
+	<title>slider in Javascript</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  
+  <section class="home">
+     <div class="slider">
+        <div class="slide active" style="background-image: url('images/slide-1.jpg')">
+            <div class="container">
+                <div class="caption">
+                    <h1>1. Winter Collection 2020</h1>
+                    <p>Lorem ipsum dummy text goes here.</p>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('images/slide-2.jpg')">
+            <div class="container">
+                <div class="caption">
+                    <h1>2. Winter Collection 2020</h1>
+                    <p>Lorem ipsum dummy text goes here.</p>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('images/slide-3.jpg')">
+            <div class="container">
+                <div class="caption">
+                    <h1>3. Winter Collection 2020</h1>
+                    <p>Lorem ipsum dummy text goes here.</p>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+        </div>
+     </div>
+   
+    <!-- controls  -->
+    <div class="controls">
+        <div class="prev"><</div>
+        <div class="next">></div>
     </div>
-    <!-- <a class="next" onclick="plusSlides(1)">  <div class="arrow  "></div></a> -->
-</div>
- <a class="prev" onclick="plusSlides(1)"><div class="arrow right"> </div></a>
-</div>
-    <script src="./js/script.js"></script>
-  </body>
+
+    <!-- indicators -->
+    <div class="indicator">
+    </div>
+
+  </section>
+
+ 
+ <script src="script.js"></script>
+
+</body>
 </html>
+
+
+
