@@ -1,3 +1,4 @@
+
 const slides = document.querySelector(".slider").children
 console.log(slides)
 const prev = document.querySelector(".prev")
